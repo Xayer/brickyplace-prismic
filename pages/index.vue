@@ -1,72 +1,90 @@
 <template>
-  <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        BrickyPlace
-      </h1>
-      <h2 class="subtitle">
-        LEGO Creations by Frederik Rabøl
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
+  <div>
+    <section class="blog-home-section">
+      <div class="blog-home-posts-wrapper">
+        <div
+          v-for="({ data, uid }) in posts"
+          :key="uid"
+          class="blog-home-post-wrapper"
         >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
+          <article>
+            <p class="blog-home-post-title">
+              {{ $prismic.asText(data.title) }}
+            </p>
+            <p class="blog-home-post-excerpt">
+              {{ $prismic.asText(data.rich_content).substring(0, 158) }}
+            </p>
+            <div class="blog-home-post-button-wrapper">
+              {{ uid }}
+              <nuxt-link class="a-button" :to="{ name: 'blog-uid', params: { uid } }">
+                Read post
+              </nuxt-link>
+            </div>
+          </article>
+        </div>
       </div>
-    </div>
+    </section>
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-
 export default {
-  components: {
-    Logo
+  async asyncData ({ $prismic }) {
+    const posts = await $prismic.api.query($prismic.predicates.at('document.type', 'blog_post'), { pageSize: 50 })
+
+    return {
+      posts: posts.results
+    }
+  },
+  head: {
+    title: 'Blog'
   }
 }
 </script>
 
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+<style lang="scss">
+.blog-home-section {
+  padding: 70px 0 130px;
 }
 
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
+.blog-home-posts-wrapper {
+  max-width: 794px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
+.blog-home-post-wrapper {
+  &:not(:first-child) {
+    border-top: 1px solid #d6d6d6;
+    margin-top: 60px;
+    padding-top: 60px;
+  }
 }
 
-.links {
-  padding-top: 15px;
+.blog-home-post-image {
+  width: 100%;
+  max-height: 546px;
+  object-fit: cover;
+}
+
+.blog-home-post-title {
+  margin-top: 56px;
+  font-family: "PT Mono", monospace;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.786;
+}
+
+.blog-home-post-excerpt {
+  margin-top: 20px;
+  font-family: "PT Mono", monospace;
+  font-size: 17px;
+  line-height: 2.353;
+}
+
+.blog-home-post-button-wrapper {
+  margin-top: 20px;
 }
 </style>

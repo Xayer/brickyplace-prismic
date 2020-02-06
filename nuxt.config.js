@@ -5,7 +5,7 @@ export default {
   ** Headers of the page
   */
   head: {
-    title: process.env.npm_package_name || '',
+    title: 'Bricky Place',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -44,8 +44,12 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    '@nuxtjs/prismic'
   ],
+  prismic: {
+    endpoint: 'https://brickyplace-blog.cdn.prismic.io/api/v2'
+  },
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
