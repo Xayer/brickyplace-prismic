@@ -7,8 +7,11 @@
       <template v-if="slice.slice_type === 'image-block'">
         <ImageBlock v-if="slice.primary.image" :url="slice.primary.image.url" :alt="slice.primary.image.alt" />
       </template>
-      <template v-if="slice.slice_type === 'text'">
-        <div v-html="$prismic.asHtml(slice.primary.text)" class="text-slice" />
+      <template v-else-if="slice.slice_type === 'text'">
+        <Paragraph :text="slice.primary.text" />
+      </template>
+      <template v-else>
+        <pre>{{ slice }}</pre>
       </template>
     </div>
   </section>
@@ -17,6 +20,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import ImageBlock from '~/components/atoms/image.vue'
+import Paragraph from '~/components/atoms/paragraph.vue'
 @Component({
 	async asyncData ({ params, error } : { params: any, error: any }) {
 		const { $prismic } = Vue.prototype.$nuxt
@@ -28,7 +32,8 @@ import ImageBlock from '~/components/atoms/image.vue'
 		}
 	},
 	components: {
-		ImageBlock
+		ImageBlock,
+		Paragraph
 	}
 })
 export default class singleArticle extends Vue {
