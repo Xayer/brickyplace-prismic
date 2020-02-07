@@ -27,15 +27,15 @@
 
 <script>
 export default {
-  async asyncData ({ $prismic }) {
-    const posts = await $prismic.api.query($prismic.predicates.at('document.type', 'blog_post'), { pageSize: 50 })
+	async asyncData ({ $prismic }) {
+		const posts = await $prismic.api.query($prismic.predicates.at('document.type', 'blog_post'), { pageSize: 50 })
 
-    return {
-      posts: posts.results
-    }
-  },
-  head: {
-    title: 'Blog'
-  }
+		return {
+			posts: posts.results
+		}
+	},
+	head: {
+		title: 'Blog'
+	}
 }
 </script>

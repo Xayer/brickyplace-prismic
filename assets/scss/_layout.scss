@@ -1,0 +1,19 @@
+#__layout {
+    max-width: $content-max-width;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+.content-block {
+    display: flex;
+    justify-content: flex-start;
+}
+.text-slice, .title {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 65vw;
+    word-wrap: break-word;
+    max-width: 765px;
+}
