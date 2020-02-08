@@ -24,5 +24,9 @@ module.exports = {
     "no-tabs": 0,
     "indent": ["error", "tab"],
     "no-console": 0,
+    "no-unused-vars": 0,
+    "sort-imports": 0,
+    "import/order": 0,
+    "camelcase": 0,
   }
 }

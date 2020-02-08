@@ -1,3 +1,8 @@
+body, html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
 #__layout {
     max-width: $content-max-width;
     width: 100%;
@@ -7,13 +12,11 @@
 }
 .content-block {
     display: flex;
-    justify-content: flex-start;
-}
-.text-slice, .title {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    width: 65vw;
-    word-wrap: break-word;
-    max-width: 765px;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    width: auto;
+    pre {
+        max-width: 70vw;
+    }
 }

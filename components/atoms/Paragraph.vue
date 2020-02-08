@@ -5,8 +5,26 @@
 import { Component, Prop } from 'vue-property-decorator'
 import Vue from 'vue'
 
+export interface ParagraphInterface {
+    type: string;
+    text: string;
+    spans: Array<any>;
+}
+
 @Component({})
 export default class Paragraph extends Vue {
 	@Prop() text!: string
 }
 </script>
+<style lang="scss">
+.text-slice {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 65vw;
+    max-width: 765px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+}
+</style>

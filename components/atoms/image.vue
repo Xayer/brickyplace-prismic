@@ -1,14 +1,29 @@
 <template>
-  <img :src="url" :alt="alt">
+  <img :src="imageUrl" :alt="image.alt">
 </template>
 <script lang="ts">
 import { Component, Prop } from 'vue-property-decorator'
 import Vue from 'vue'
 
+export interface ImageInterface {
+	dimensions: {
+		width: number;
+		height: number;
+	},
+	alt: string;
+	copyright: string;
+	url: string;
+	medium: ImageInterface;
+	teaser: ImageInterface;
+}
+
 @Component({})
 export default class ImageBlock extends Vue {
-	@Prop() url!: string
-	@Prop() alt!: string
+	@Prop() image!: ImageInterface
+
+	get imageUrl () {
+		return `${this.image.url}&w=${this.image.dimensions.width}q=80`
+	}
 }
 </script>
 <style lang="scss" scoped>
