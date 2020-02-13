@@ -1,14 +1,29 @@
 <template>
   <div>
+    <Header />
     <nuxt />
+    <Footer />
   </div>
 </template>
+<script>
+import { Component, Vue } from 'vue-property-decorator'
+import Footer from '~/layouts/Footer.vue'
+import Header from '~/layouts/Header.vue'
 
+@Component({
+	components: {
+		Header,
+		Footer
+	}
+})
+export default class Layout extends Vue {
+
+}
+</script>
 <style lang="scss">
 @import '~assets/scss/main.scss';
 html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: Graphik,Arial,sans-serif;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
@@ -16,6 +31,8 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
+  background-image: url('~assets/img/bricks.svg');
+  background-size: 10%;
 }
 
 *,

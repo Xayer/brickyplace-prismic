@@ -8,7 +8,7 @@
       <span v-html="$prismic.asHtml(description)" class="label" />
     </div>
     <div class="append">
-      <a :href="link.url" v-text="$prismic.asText(label)" class="btn" />
+      <Button :href="link.url" :title="$prismic.asText(label)" />
     </div>
   </article>
 </template>
@@ -16,6 +16,7 @@
 import { ParagraphInterface } from '../atoms/Paragraph.vue'
 import { ImageInterface } from '../atoms/Image.vue'
 import { Component, Prop } from 'vue-property-decorator'
+import Button from '../atoms/Button.vue'
 import Vue from 'vue'
 
 export interface CardInterface {
@@ -34,7 +35,11 @@ export interface ExternalLinkInterface {
 	size: string;
 }
 
-@Component({})
+@Component({
+	components: {
+		Button
+	}
+})
 export default class Card extends Vue {
 	@Prop() title!: Array<ParagraphInterface>
 	@Prop() description!: Array<ParagraphInterface>
@@ -42,7 +47,7 @@ export default class Card extends Vue {
 	@Prop() link!: ExternalLinkInterface
 	@Prop() label!: Array<ParagraphInterface>
 	get formattedTitle () {
-		return this.title[0].text
+		return this.title ? this.title[0].text : ''
 	}
 	get teaserImage () {
 		return `${this.image.url}&w=${this.image.teaser.dimensions.width}`
@@ -50,33 +55,6 @@ export default class Card extends Vue {
 }
 </script>
 <style lang="scss" scoped>
-.btn {
-	padding: .5rem 1rem;
-	color: white;
-	font-size: 1.25rem;
-	line-height: 1.25rem;
-	box-sizing: border-box;
-	border-color: white;
-	border-radius: .5rem;
-	text-decoration: none;
-	margin: 0;
-	background-color: #1862c6;
-	transition: all .25s;
-	&:hover {
-		background-color: transparentize(#1862c6, 0.25);
-	}
-	border: 2px solid transparent;
-	&.outline {
-		color: #1862c6;
-		border-color: #1862c6;
-		background-color: transparent;
-		&:hover {
-			color: transparentize(#1862c6, 0.25);
-			border-color: transparentize(#1862c6, 0.25);
-		}
-	}
-}
-
 article {
 	margin-top: 1rem;
 	background-color: white;
@@ -85,7 +63,6 @@ article {
 	padding: 1rem;
 	box-shadow: 0 0.75rem 1.5rem rgba(18,38,63,.03);
 	border: 1px solid #edf2f9;
-	border-radius: .5rem;
 	align-items: flex-start;
 	flex-direction: row;
 	align-items: center;

@@ -31,6 +31,7 @@ import { Component, Vue } from 'vue-property-decorator'
 import ImageBlock from '~/components/atoms/Image.vue'
 import Paragraph from '~/components/atoms/Paragraph.vue'
 import Card from '~/components/molecules/Card.vue'
+import CallToAction from '~/components/molecules/CallToAction.vue'
 @Component({
 	async asyncData ({ params, error } : { params: any, error: any }) {
 		const { $prismic } = Vue.prototype.$nuxt
@@ -44,18 +45,22 @@ import Card from '~/components/molecules/Card.vue'
 	components: {
 		ImageBlock,
 		Paragraph,
-		Card
+		Card,
+		CallToAction
 	}
 })
 export default class singleArticle extends Vue {
 	hello!: any;
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 	section {
+		max-width: $content-max-width;
+		width: 100%;
 		display: flex;
+		align-items: center;
 		flex-direction: column;
 		justify-content: center;
-		align-items: center;
+		margin: 0 auto;
 	}
 </style>

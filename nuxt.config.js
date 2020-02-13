@@ -46,7 +46,9 @@ export default {
 		'@nuxtjs/pwa',
 		// Doc: https://github.com/nuxt-community/dotenv-module
 		'@nuxtjs/dotenv',
-		'@nuxtjs/prismic'
+		'@nuxtjs/prismic',
+		'@nuxtjs/style-resources',
+		'nuxt-webfontloader'
 	],
 	prismic: {
 		endpoint: 'https://brickyplace-blog.cdn.prismic.io/api/v2'
@@ -65,6 +67,17 @@ export default {
 		** You can extend webpack config here
 		*/
 		extend (config, ctx) {
+		}
+	},
+	styleResources: {
+		scss: [
+			'assets/scss/main.scss'
+		]
+	},
+	webfontloader: {
+		custom: {
+			families: ['Graphik', 'Tiempos Headline'],
+			urls: ['/fonts/fonts.css']
 		}
 	}
 }

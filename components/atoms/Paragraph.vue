@@ -18,11 +18,6 @@ export default class Paragraph extends Vue {
 </script>
 <style lang="scss">
 .text-slice {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    width: 65vw;
-    max-width: 765px;
     overflow-wrap: break-word;
     word-wrap: break-word;
     hyphens: auto;
