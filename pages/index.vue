@@ -1,72 +1,56 @@
 <template>
-  <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        BrickyPlace
-      </h1>
-      <h2 class="subtitle">
-        LEGO Creations by Frederik Rabøl
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
+  <div>
+    <section class="blog-home-section">
+      <div class="blog-home-posts-wrapper">
+        <div
+          v-for="({ data, uid }) in posts"
+          :key="uid"
+          class="blog-home-post-wrapper"
         >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
+          <article>
+            <p class="blog-home-post-title">
+              {{ $prismic.asText(data.title) }}
+            </p>
+            <p v-text="$prismic.asText(data.description)" class="blog-home-post-excerpt" />
+            <div class="blog-home-post-button-wrapper">
+              {{ uid }}
+              <nuxt-link :to="{ name: 'article-uid', params: { uid } }" class="a-button">
+                Read post
+              </nuxt-link>
+            </div>
+          </article>
+        </div>
       </div>
-    </div>
+    </section>
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import { Component, Vue } from 'vue-property-decorator'
+import ImageBlock from '~/components/atoms/Image.vue'
+import Paragraph from '~/components/atoms/Paragraph.vue'
+import Card from '~/components/molecules/Card.vue'
+import CallToAction from '~/components/molecules/CallToAction.vue'
 
-export default {
-  components: {
-    Logo
-  }
+@Component({
+	async asyncData ({ $prismic }) {
+		const posts = await $prismic.api.query($prismic.predicates.at('document.type', 'blog_post'), { pageSize: 50 })
+
+		return {
+			posts: posts.results
+		}
+	},
+	components: {
+		ImageBlock,
+		Paragraph,
+		Card,
+		CallToAction
+	},
+	head: {
+		title: 'Blog'
+	}
+})
+export default class singleArticle extends Vue {
+
 }
 </script>
-
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
-</style>
