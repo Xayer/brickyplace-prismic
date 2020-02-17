@@ -5,7 +5,9 @@
       <div>
         <h1 v-text="title" />
         <p v-text="description" />
-        <Button :href="link.url" :title="label" />
+        <slot name="url">
+          <Button v-if="link" :href="link.url" :title="label" />
+        </slot>
       </div>
     </slot>
   </div>
@@ -26,10 +28,10 @@ export default class CallToAction extends Vue {
 	@Prop({ required: false }) title!: string
 	@Prop({ required: false }) description!: string
 	@Prop({ required: false }) image!: ImageInterface;
-	@Prop() link!: ExternalLinkInterface
+	@Prop({ required: false }) link!: ExternalLinkInterface
 	@Prop({ required: false }) label!:string;
 	get teaserImage () {
-		return `${this.image.url}&h=${this.image.dimensions.height}`
+		return this.image && this.image.url ? `${this.image.url}&h=${this.image.dimensions.height}&w=${this.image.dimensions.width}` : ''
 	}
 }
 </script>
