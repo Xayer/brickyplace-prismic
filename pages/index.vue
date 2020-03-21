@@ -18,36 +18,32 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import ImageBlock, { ImageInterface } from '~/components/atoms/Image.vue'
-import Paragraph from '~/components/atoms/Paragraph.vue'
-import Card from '~/components/molecules/Card.vue'
+import { ImageInterface } from '~/components/atoms/Image.vue'
 import CallToAction from '~/components/molecules/CallToAction.vue'
 
-@Component({
-	async asyncData ({ $prismic } : { $prismic: any }) {
+export default {
+	components: {
+		CallToAction
+	},
+	async asyncData () {
+		const { $prismic } = Vue.prototype.$nuxt
 		const posts = await $prismic.api.query($prismic.predicates.at('document.type', 'blog_post'), { pageSize: 50 })
 
 		return {
 			posts: posts.results
 		}
 	},
-	components: {
-		ImageBlock,
-		Paragraph,
-		Card,
-		CallToAction
-	},
 	head: {
 		title: 'Blog'
-	}
-})
-export default class singleArticle extends Vue {
-	TeaserImage (image: ImageInterface) {
-		return {
-			...image,
-			dimensions: {
-				height: 256,
-				width: 350
+	},
+	methods: {
+		TeaserImage (image: ImageInterface) {
+			return {
+				...image,
+				dimensions: {
+					height: 256,
+					width: 350
+				}
 			}
 		}
 	}

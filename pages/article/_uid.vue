@@ -53,7 +53,6 @@ import CallToAction from '~/components/molecules/CallToAction.vue'
 	}
 })
 export default class singleArticle extends Vue {
-	hello!: any;
 }
 </script>
 <style lang="scss" scoped>

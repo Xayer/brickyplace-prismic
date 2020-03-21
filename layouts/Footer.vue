@@ -9,25 +9,13 @@
     />
   </footer>
 </template>
-<script>
+<script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import ImageBlock from '~/components/atoms/Image.vue'
-import Paragraph from '~/components/atoms/Paragraph.vue'
-import Card from '~/components/molecules/Card.vue'
 import CallToAction from '~/components/molecules/CallToAction.vue'
 
 @Component({
-	async asyncData ({ $prismic }) {
-		const posts = await $prismic.api.query($prismic.predicates.at('document.type', 'blog_post'), { pageSize: 50 })
 
-		return {
-			posts: posts.results
-		}
-	},
 	components: {
-		ImageBlock,
-		Paragraph,
-		Card,
 		CallToAction
 	},
 	head: {
