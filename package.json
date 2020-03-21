@@ -24,7 +24,9 @@
     "push-dir": "^0.4.1",
     "sass-loader": "^8.0.2",
     "vue-property-decorator": "^8.4.0",
-    "nuxt-webfontloader": "^1.0.0"
+    "nuxt-webfontloader": "^1.0.0",
+    "prismic-javascript": "^2.7.0",
+    "prismic-vue": "^2.0.0"
   },
   "devDependencies": {
     "@nuxt/typescript-build": "^0.5.6",

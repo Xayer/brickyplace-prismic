@@ -1,3 +1,5 @@
+import { prismicEndpoint, initApi } from './app/prismic'
+import Prismic from 'prismic-javascript'
 
 export default {
 	mode: 'universal',
@@ -51,7 +53,8 @@ export default {
 		'nuxt-webfontloader'
 	],
 	prismic: {
-		endpoint: 'https://brickyplace-blog.cdn.prismic.io/api/v2'
+		endpoint: prismicEndpoint,
+		preview: '/preview/'
 	},
 	/*
 	** Axios module configuration
@@ -78,6 +81,27 @@ export default {
 		custom: {
 			families: ['Graphik', 'Tiempos Headline'],
 			urls: ['/fonts/fonts.css']
+		}
+	},
+	generate: {
+		routes () {
+			const blogPosts = initApi().then((api) => {
+				return api.query(Prismic.Predicates.at('document.type', 'blog_post'))
+					.then((response) => {
+						return response.results.map((payload) => {
+							return {
+								route: `/article/${payload.uid}`,
+								payload
+							}
+						})
+					})
+			})
+
+			return Promise.all([blogPosts]).then((values) => {
+				return [
+					...values[0]
+				]
+			})
 		}
 	}
 }
