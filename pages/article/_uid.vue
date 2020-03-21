@@ -1,11 +1,14 @@
 <template>
   <section v-if="document">
     <div class="content-block">
-      <h1 v-text="$prismic.asText(document.data.title)" class="title" />
+      <div class="content-header text-slice">
+        <h1 v-text="$prismic.asText(document.data.title)" class="title" />
+        <p v-text="$prismic.asText(document.data.description)" class="description" />
+      </div>
     </div>
     <div v-for="(slice, sliceIndex) in document.data.body" :key="`${slice.slice_type}_${sliceIndex}`" class="content-block">
       <template v-if="slice.slice_type === 'image-block'">
-        <ImageBlock v-if="slice.primary.image" :image="slice.primary.image" />
+        <ImageBlock v-if="slice.primary.image" :image="slice.primary.image" class="image-block" />
       </template>
       <template v-else-if="slice.slice_type === 'text'">
         <Paragraph :text="slice.primary.text" />

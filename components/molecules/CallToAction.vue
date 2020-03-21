@@ -38,7 +38,7 @@ export default class CallToAction extends Vue {
 <style lang="scss">
     .call-to-action {
 		width: 100%;
-		max-width: 1024px;
+		max-width: 1300px;
 		display: flex;
 		min-height: 256px;
 		flex-direction: column;

@@ -4,16 +4,35 @@ body, html {
 }
 .content-block {
     width: 100%;
-    display: block;
+    display: flex;
     background-color: #fff;
     border: 0px solid rgb(177, 177, 177);
     border: {
         left-width: 2px;
         right-width: 2px;
     }
+    &:first-of-type {
+        border-top-width: 2px;
+    }
+    &:last-of-type {
+        border-bottom-width: 2px;
+    }
+
     padding: 1rem 1.5rem;
-    max-width: 765px;
+    max-width: 1300px;
+    flex-direction: column;
     pre {
         max-width: 70vw;
+    }
+    .image-block {
+        align-self: center;
+        max-width: 100%;
+    }
+}
+
+.content-header {
+    font-size: 1.25rem;
+    .title {
+        margin-bottom: 1rem;
     }
 }

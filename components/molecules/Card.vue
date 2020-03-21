@@ -64,12 +64,19 @@ article {
 	box-shadow: 0 0.75rem 1.5rem rgba(18,38,63,.03);
 	border: 1px solid #edf2f9;
 	align-items: flex-start;
-	flex-direction: row;
+	flex-direction: column;
 	align-items: center;
+	@media screen and (min-width: 768px) {
+		flex-direction: row;
+	}
 	.prepend, .append {
 		flex-shrink: 1;
 	img {
 		object-fit: cover;
+		max-width: 100%;
+		@media screen and (min-width: 768px) {
+			flex-direction: row;
+		}
 	}
 	border-radius: .5rem;
 }

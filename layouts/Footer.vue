@@ -47,6 +47,7 @@ export default class Layout extends Vue {
 	footer {
 		display: flex;
 		width: 100%;
+		margin-top: 2rem;
 		align-items: center;
 		justify-content: center;
 		background-color: rgb(242, 242, 242);

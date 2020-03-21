@@ -30,7 +30,6 @@ export default class ImageBlock extends Vue {
 	img {
 		max-width: 100%;
 		height: auto;
-		margin: 1.5rem 0;
 		box-shadow: 0px 0px 1px 0px #222;
 	}
 </style>

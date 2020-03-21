@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="articles">
     <CallToAction
       v-for="({ data, uid }) in posts"
       :key="uid"
@@ -58,5 +58,17 @@ export default class singleArticle extends Vue {
     display: flex;
     justify-content: center;
     align-items: center;
+	flex-direction: column;
+	&.articles {
+		max-width: 1300px;
+		width: 100%;
+		margin: 0 auto;
+		background-color: #fff;
+		border: 2px solid rgb(177, 177, 177);
+		.call-to-action {
+			background-color: transparent;
+			text-align: left;
+		}
+	}
   }
 </style>
