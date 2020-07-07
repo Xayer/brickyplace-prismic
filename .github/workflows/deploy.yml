@@ -31,12 +31,12 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    run: yarn generate
+    - run: yarn generate
     - name: Setup Credentials
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-      run: |
+    - run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
         git remote set-url origin https://xayer:${{ secrets.DEPLOY_TOKEN }}@github.com/${{ GITHUB_REPOSITORY }}
@@ -47,4 +47,4 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-      run: yarn deploy
+    - run: yarn deploy
