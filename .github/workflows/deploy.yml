@@ -35,6 +35,11 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: yarn generate
+    - name: Setup Credentials
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: yarn git-config
     - name: Deploy Site
       uses: actions/setup-node@v1
       with:

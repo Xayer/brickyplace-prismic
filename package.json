@@ -11,6 +11,7 @@
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "test": "jest",
+    "git-config": "git config user.email=\"frederik-rm@hotmail.com\" & git config user.name=\"Deploy Script\"",
     "deploy": "push-dir --dir=dist --branch=master --cleanup --verbose"
   },
   "dependencies": {
