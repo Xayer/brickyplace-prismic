@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 14.x]
+        node-version: [10.x]
 
     steps:
     - uses: actions/checkout@v2
@@ -24,19 +24,19 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm ci
+    - run: yarn --frozen-lockfile
     - name: Run Linting
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm run lint --if-present
+    - run: yarn lint --if-present
     - name: Generate Site
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm run generate --if-present
+    - run: yarn generate --if-present
     - name: Deploy Site
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm run deploy --if-present
+    - run: yarn deploy --if-present

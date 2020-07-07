@@ -13,11 +13,11 @@
   </div>
 </template>
 <script lang="ts">
-import { ParagraphInterface } from '../atoms/Paragraph.vue'
-import { ImageInterface } from '../atoms/Image.vue'
+import { ParagraphInterface } from '~/components/atoms/Paragraph.vue'
+import { ImageInterface } from '~/components/atoms/Image.vue'
 import { Prop, Component, Vue } from 'vue-property-decorator'
 import { ExternalLinkInterface } from './Card.vue'
-import Button from '../atoms/Button.vue'
+import Button from '~/components/atoms/Button.vue'
 
 @Component({
 	components: {
