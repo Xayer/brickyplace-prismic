@@ -21,7 +21,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Install dependencies with Yarn
       run: yarn --frozen-lockfile
     - name: Run Linting
       run: yarn lint
@@ -30,7 +30,7 @@ jobs:
     - name: Setup Credentials
       run: |
         git config --global user.name "github-actions[bot]"
-        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git config --global user.email "${{ github.action }}+github-actions[bot]@users.noreply.github.com"
         git remote set-url origin https://xayer:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
 
     - name: Deploy Site
