@@ -37,7 +37,7 @@ jobs:
       run:  |
         git --work-tree dist checkout --orphan master-${{ github.sha }}
         git --work-tree dist add --all
-        git --work-tree dist commit -m deployment of ${{ github.sha }}
+        git --work-tree dist commit -m "deployment of ${{ github.sha }}"
         git push origin HEAD:master --force
         git checkout -f development
         git branch -D master-${{ github.sha }}
