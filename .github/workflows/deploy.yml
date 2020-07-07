@@ -17,26 +17,18 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }} to Install dependencies
+    - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    - name: Use Node.js ${{ matrix.node-version }}
       run: yarn --frozen-lockfile
     - name: Run Linting
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
       run: yarn lint
     - name: Generate Site
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: yarn generate
+      run: yarn generate
     - name: Setup Credentials
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: |
+      run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
         git remote set-url origin https://xayer:${{ secrets.DEPLOY_TOKEN }}@github.com/${{ GITHUB_REPOSITORY }}
@@ -44,7 +36,4 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
 
     - name: Deploy Site
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: yarn deploy
+      run: yarn deploy
