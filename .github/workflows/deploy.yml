@@ -29,14 +29,14 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: yarn lint --if-present
+    - run: yarn lint
     - name: Generate Site
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: yarn generate --if-present
+    - run: yarn generate
     - name: Deploy Site
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: yarn deploy --if-present
+    - run: yarn deploy
