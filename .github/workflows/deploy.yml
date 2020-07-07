@@ -2,11 +2,9 @@
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
 name: Node.js CI
-
+fb53c5f951291a5f266ce54f925cc9573b79a6f8
 on:
   push:
-    branches: [ development ]
-  pull_request:
     branches: [ development ]
 
 jobs:
@@ -24,24 +22,30 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: yarn --frozen-lockfile
+      run: yarn --frozen-lockfile
     - name: Run Linting
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: yarn lint
+      run: yarn lint
     - name: Generate Site
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: yarn generate
+    run: yarn generate
     - name: Setup Credentials
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: yarn git-config
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git remote set-url origin https://xayer:${{ secrets.DEPLOY_TOKEN }}@github.com/${{ GITHUB_REPOSITORY }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+
     - name: Deploy Site
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: yarn deploy
+      run: yarn deploy
