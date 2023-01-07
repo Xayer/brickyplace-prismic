@@ -20,7 +20,7 @@
     "@nuxtjs/pwa": "^3.0.0-0",
     "@nuxtjs/style-resources": "^1.0.0",
     "node-sass": "^4.13.1",
-    "nuxt": "^2.0.0",
+    "nuxt": "^2.15.8",
     "push-dir": "^0.4.1",
     "sass-loader": "^8.0.2",
     "vue-property-decorator": "^8.4.0",
